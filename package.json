@@ -1,0 +1,31 @@
+{
+  "name": "tff-plugin-ccb",
+  "version": "0.1.0",
+  "description": "ccb pay for tff",
+  "cordova": {
+    "id": "tff-plugin-ccb",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Admire-9/tff-plugin-ccb.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.5.0"
+    }
+  ],
+  "author": "admire",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Admire-9/tff-plugin-ccb/issues"
+  },
+  "homepage": "https://github.com/Admire-9/tff-plugin-ccb#readme"
+}
