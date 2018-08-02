@@ -46,7 +46,8 @@
                     android:screenOrientation="portrait"/>
         </config-file>
 
-        <source-file src="src/android/TffCCB.java" target-dir="src/org/apache/cordova/tffccb" />
+        <source-file src="src/android/res/TffCCB.java" target-dir="src/org/apache/cordova/tffccb" />
+        <source-file src="src/android/res/Util.java" target-dir="src/org/apache/cordova/tffccb" />
         <source-file src="src/android/libs/ccbnetpay_v2.1.1.jar" target-dir="libs"/>
     </platform>
 
