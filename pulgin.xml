@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="tff-plugin-ccb"
+        version="0.1.0"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>TffCCB</name>
+
+    <engines>
+        <engine name="cordova" version=">=3.5.0"/>
+    </engines>
+
+    <js-module name="TffCCB" src="www/tffccb.js">
+        <clobbers target="TffCCB" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TffCCB" >
+                <param name="android-package" value="org.apache.cordova.tffccb.TffCCB"/>
+            </feature>
+            <preference name="PRIVATE_KEY" value="$PRIVATE_KEY"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.ccb.ccbnetpay.activity.CcbH5PayActivity"
+                    android:label="@string/app_name"
+                    android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:screenOrientation="portrait"/>
+        
+            <activity android:name="com.ccb.ccbnetpay.activity.appresult.ResultActivity"
+                    android:label="@string/app_name"
+                    android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:screenOrientation="portrait">
+                <intent-filter>
+                    <action android:name="ccbdemo"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                </intent-filter>
+            </activity>
+            <activity android:name="com.ccb.ccbnetpay.activity.CcbUnionPayActivity"
+                    android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:screenOrientation="portrait"/>
+        </config-file>
+
+        <source-file src="src/android/TffCCB.java" target-dir="src/org/apache/cordova/tffccb" />
+        <source-file src="src/android/libs/ccbnetpay_v2.1.1.jar" target-dir="libs"/>
+    </platform>
+
+</plugin>
