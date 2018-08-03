@@ -2,16 +2,16 @@ package org.apache.cordova.tffccb;
 
 import android.util.Log;
 
-import com.ccb.ccbnetpay.CcbMorePay;
 import com.ccb.ccbnetpay.message.CcbPayResultListener;
 import com.ccb.ccbnetpay.platform.CcbPayPlatform;
 import com.ccb.ccbnetpay.platform.Platform;
 import com.ccb.ccbnetpay.util.CcbSdkLogUtil;
 import com.ccb.ccbnetpay.util.IPUtil;
 
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -19,9 +19,6 @@ import java.util.Map;
 public class TffCCB extends CordovaPlugin {
     public static final String TAG = "建行支付";
     private String price = null;
-    private BusInfoEntity busInfo = null;
-    private IntentFilter filter = null;
-
     private CcbPayResultListener listener = null;
     private static String Ip = "";
 
@@ -33,9 +30,9 @@ public class TffCCB extends CordovaPlugin {
      * @param callbackContext   The callback id used when calling back into JavaScript.
      * @return                  True if the action was valid, false if not.
      */
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         Ip = IPUtil.getIPAddress();
-        String params = Util.make(busInfo, price, Ip);
+        String params = Url.make(price, Ip);
         listener = new CcbPayResultListener() {
             @Override
             public void onSuccess(Map<String, String> result) {
