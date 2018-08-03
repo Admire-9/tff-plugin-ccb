@@ -1,5 +1,6 @@
 package org.apache.cordova.tffccb;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.ccb.ccbnetpay.message.CcbPayResultListener;
@@ -17,10 +18,24 @@ import java.util.Map;
 
 
 public class TffCCB extends CordovaPlugin {
+    private Activity activity;
     public static final String TAG = "建行支付";
-    private String price = null;
+    private String price = "0.01";
     private CcbPayResultListener listener = null;
     private static String Ip = "";
+
+    /**
+     * Sets the context of the Command. This can then be used to do things like
+     * get file paths associated with the Activity.
+     *
+     * @param cordova The context of the main Activity.
+     * @param webView The CordovaWebView Cordova is running in.
+     */
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        Log.e("initialize","============================");
+        activity = cordova.getActivity();
+    }
 
     /**
      * Executes the request and returns PluginResult.
@@ -32,6 +47,7 @@ public class TffCCB extends CordovaPlugin {
      */
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         Ip = IPUtil.getIPAddress();
+        Url url = new Url();
         String params = Url.make(price, Ip);
         listener = new CcbPayResultListener() {
             @Override
@@ -52,6 +68,7 @@ public class TffCCB extends CordovaPlugin {
         CcbSdkLogUtil.d(params);
         Platform ccbPayPlatform = new CcbPayPlatform
                 .Builder()
+                .setActivity(activity)
                 .setListener(listener)
                 .setParams(params).setPayStyle(Platform.PayStyle.APP_OR_H5_PAY).build();
         ccbPayPlatform.pay();
