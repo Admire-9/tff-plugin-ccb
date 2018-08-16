@@ -10,7 +10,9 @@ import com.ccb.ccbnetpay.util.CcbSdkLogUtil;
 import com.ccb.ccbnetpay.util.IPUtil;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -33,7 +35,7 @@ public class TffCCB extends CordovaPlugin {
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        Log.e("initialize","============================");
+        Log.i("initialize","============================");
         activity = cordova.getActivity();
     }
 
@@ -48,24 +50,24 @@ public class TffCCB extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         Ip = IPUtil.getIPAddress();
         Url url = new Url();
-        String params = Url.make(price, Ip);
+        String params = url.make(price, Ip);
+        CcbSdkLogUtil.d(params);
         listener = new CcbPayResultListener() {
             @Override
             public void onSuccess(Map<String, String> result) {
-                Log.d(TAG, "支付成功 --" + result);
+                Log.i(TAG, "支付成功 --" + result);
                 for (Map.Entry entry : result.entrySet()) {
-                    Log.d(TAG, "key --" + entry.getKey() + "  value --" + entry.getValue());
+                    Log.i(TAG, "key --" + entry.getKey() + "  value --" + entry.getValue());
                 }
                 callbackContext.success(1);
             }
 
             @Override
             public void onFailed(String msg) {
-                Log.d(TAG, "支付失败 --" + msg);
+                Log.i(TAG, "支付失败 --" + msg);
                 callbackContext.error(0);
             }   
         };
-        CcbSdkLogUtil.d(params);
         Platform ccbPayPlatform = new CcbPayPlatform
                 .Builder()
                 .setActivity(activity)
