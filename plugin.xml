@@ -55,8 +55,8 @@
         <config-file target="config.xml" parent="/*">
             <preference name="pub" value="$PUB_KEY" />
             <feature name="TffCCB">
-                <param name="ios-package" value="CDTffCCB">
-                <param name="onload" value="true">
+                <param name="ios-package" value="CcbpayPlugin" />
+                <param name="onload" value="true" />
             </feature>
         </config-file>
         <config-file target="*-Info.plist" parent="CFBundleURLTypes">
@@ -71,14 +71,14 @@
                 </dict>
             </array>
         </config-file>
-        
+
         <framework src="src/ios/lib/CCBNetPaySDK.framework" custom="true" />
 
         <header-file src="src/ios/CcbpayPlugin.h"/>
         <source-file src="src/ios/CcbpayPlugin.m"/>
 
-        <header-file src="src/ios/Order.h"/>
-        <source-file src="src/ios/Order.m"/>
+        <header-file src="src/ios/CcbOrder.h"/>
+        <source-file src="src/ios/CcbOrder.m"/>
 
     </platform>
 </plugin>
