@@ -8,25 +8,23 @@ import android.util.Log;
 public class Url {
 
   public String INTER_FLAG = "3";// 接口类型，若为'1'则表示新接口，新接口必需有商户公钥的前30位PUB32  UAT--可用防钓鱼接口
-  public String MERCHANTID = "105421097080119"; //商户代码
-  public String POSID = "809042103"; //商户柜台代码
-  public String BRANCHID = "510000000"; //分行代码
-  public String PUB32TR2 = "9d3f3c6e3beac835b646359d020111";
-  public String ORDERID = "96959"; //定单号
-  public String PAYMENT = "0.01"; //付款金额
+  public String MERCHANTID = ""; //商户代码
+  public String POSID = ""; //商户柜台代码
+  public String BRANCHID = ""; //分行代码
+  public String PUB32TR2 = "";
+  public String ORDERID = ""; //定单号
+  public String PAYMENT = ""; //付款金额
   public String CURCODE = "01"; //币种
-  public String TXCODE = "520100"; //交易码
+  public String TXCODE = ""; //交易码
   public String OPERID = "";
   public String AUTHID = "";
   public String PASSWORD = "";
   public String REQUESTSN = "";
   public String REMARK1 = ""; //备注1
   public String REMARK2 = ""; //备注2
-  public String PUB32 = "9d3f3c6e3beac835b646359d020111";
-  public String GATEWAY = "";
-//  public String GATEWAY = "UnionPay";
-  public String REGINFO = "";//xiaofeixia
-  //public String CLIENTIP = "128.128.0.1";
+  public String PUB32 = "";
+  public String GATEWAY = "0";
+  public String REGINFO = "";
   public String CLIENTIP = "";
   public String PROINFO = "";//digital
   public String MER_REFERER = "";
@@ -44,15 +42,20 @@ public class Url {
   public Url() {
   }
 
-  public String make(String price, String ip) {
+  public String make(String pub, String txcode, String merchantid, String postid, String branchid, String price, String ip, String orderid, String installnum) {
     String tmp;
     String tmp0;
     String temp_New1 = "", urlResult = "";
-    PAYMENT = price;
-    Random rand = new Random();
-    ORDERID = MERCHANTID+String.valueOf(rand.nextInt(99999));
+    PUB32 = pub;
+    PUB32TR2 = pub;
     CLIENTIP = ip;
-
+    POSID = postid;
+    PAYMENT = price;
+    TXCODE = txcode;
+    MERCHANTID = merchantid;
+    BRANCHID = branchid;
+    ORDERID = orderid;
+    INSTALLNUM = installnum;
     tmp = "MERCHANTID=" + MERCHANTID + "&POSID=" + POSID + "&BRANCHID="
             + BRANCHID + "&ORDERID=" + ORDERID + "&PAYMENT=" + PAYMENT
             + "&CURCODE=" + CURCODE + "&TXCODE=" + TXCODE + "&REMARK1="
@@ -64,7 +67,6 @@ public class Url {
 
     String index = "3";
     String temp_New = tmp;
-    // alert("接口类型为："+index+"  (1为新接口类型，其他为旧接口类型)");
 
     if ("1".equals(index)) {
       temp_New = tmp + "&PUB32=" + PUB32;
@@ -130,26 +132,26 @@ public class Url {
     return urlResult;
   }
 
-    public String escape(String str) {
-        int i;
-        char j;
-        StringBuffer tmp = new StringBuffer();
-        tmp.ensureCapacity(str.length() * 6);
-        for (i = 0; i < str.length(); i++) {
-            j = str.charAt(i);
-            if (Character.isDigit(j) || Character.isLowerCase(j) || Character.isUpperCase(j))
-                tmp.append(j);
-            else if (j < 256) {
-                tmp.append("%");
-                if (j < 16)
-                    tmp.append("0");
-                tmp.append(Integer.toString(j, 16));
-            } else {
-                tmp.append("%u");
-                tmp.append(Integer.toString(j, 16));
-            }
-        }
-        return tmp.toString();
-    }
+  public String escape(String str) {
+      int i;
+      char j;
+      StringBuffer tmp = new StringBuffer();
+      tmp.ensureCapacity(str.length() * 6);
+      for (i = 0; i < str.length(); i++) {
+          j = str.charAt(i);
+          if (Character.isDigit(j) || Character.isLowerCase(j) || Character.isUpperCase(j))
+              tmp.append(j);
+          else if (j < 256) {
+              tmp.append("%");
+              if (j < 16)
+                  tmp.append("0");
+              tmp.append(Integer.toString(j, 16));
+          } else {
+              tmp.append("%u");
+              tmp.append(Integer.toString(j, 16));
+          }
+      }
+      return tmp.toString();
+  }
 
 }

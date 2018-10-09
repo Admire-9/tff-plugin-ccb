@@ -9,10 +9,12 @@
 @implementation CcbpayPlugin
 
 -(void)pluginInitialize{
-//    CDVViewController *viewController = (CDVViewController *)self.viewController;
-//    self.partner = [viewController.settings objectForKey:@"partner"];
-//    self.seller = [viewController.settings objectForKey:@"seller"];
-//    self.privateKey = [viewController.settings objectForKey:@"privatekey"];
+   CDVViewController *viewController = (CDVViewController *)self.viewController;
+   self.pub = [viewController.settings objectForKey:@"pub"];
+   self.txcode = [viewController.settings objectForKey:@"txcode"];
+   self.merchantid = [viewController.settings objectForKey:@"merchantid"];
+   self.postid = [viewController.settings objectForKey:@"postid"];
+   self.branchid = [viewController.settings objectForKey:@"branchid"];
 }
 
 - (void) pay:(CDVInvokedUrlCommand *)command
@@ -27,7 +29,7 @@
     //partner和seller获取失败,提示
 //    if ([self.partner length] == 0 ||
 //        [self.seller length] == 0 ||
-//        [self.privateKey length] == 0)
+//        [self.privateKey length] == 0 || )
 //    {
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
 //                                                        message:@"缺少partner或者seller或者私钥。"
@@ -44,18 +46,21 @@
     
     //从API请求获取支付信息
     NSMutableDictionary *args = [command argumentAtIndex:0];
-    NSString   *MERCHANTID  = @"105510148160150";
-    NSString   *POSID  = @"809042103";
-    NSString   *BRANCHID     = @"510000000";
-    NSString   *ORDERID    = @"131222214551243";
+    NSString   *MERCHANTID  = @"105510148160150"; //105510148160150
+    NSString   *POSID  = @"809042103"; //809042103
+    NSString   *BRANCHID     = @"510000000"; //510000000
+    NSString   *ORDERID    = @"10551014816015098577";
     NSString   *PAYMENT    = @"0.01";
     NSString   *CURCODE    = @"01";
     NSString   *REMARK1    = [args objectForKey:@"REMARK1"];
     NSString   *REMARK2    = [args objectForKey:@"REMARK2"];
-    NSString   *TXCODE    = @"520100";
+    NSString   *TXCODE    = @"520100"; //520100
     NSString   *TYPE    = @"1";
-    NSString   *PUB    = @"9d3f3c6e3beac835b646359d020111";
-    NSString   *GATEWAY    = @"0";
+    NSString   *PUB    = @"9d3f3c6e3beac835b646359d020111"; //9d3f3c6e3beac835b646359d020111
+    NSString   *GATEWAY    = @"";
+    NSString   *INSTALLNUM = @"3";
+    NSString   *CLIENTIP = [[CCBNetPay defaultService] getIPAddress];
+    NSString   *THIRDAPPINFO = @"comccbpay105510148160150testtff";
     CcbOrder *order = [[CcbOrder alloc] init];
     order.MERCHANTID = MERCHANTID;
     order.POSID = POSID;
@@ -63,12 +68,15 @@
     order.ORDERID = ORDERID;
     order.PAYMENT = PAYMENT;
     order.CURCODE = CURCODE;
-    order.REMARK1 =  REMARK1; //回调URL
+    order.REMARK1 =  REMARK1;
     order.REMARK2 = REMARK2;
     order.TXCODE = TXCODE;
     order.TYPE = TYPE;
     order.PUB = PUB;
     order.GATEWAY = GATEWAY;
+    order.INSTALLNUM = INSTALLNUM;
+    order.CLIENTIP = CLIENTIP;
+    order.THIRDAPPINFO = THIRDAPPINFO;
     
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];

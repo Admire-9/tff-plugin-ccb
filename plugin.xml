@@ -19,7 +19,11 @@
             <feature name="TffCCB" >
                 <param name="android-package" value="org.apache.cordova.tffccb.TffCCB"/>
             </feature>
-            <preference name="PRIVATE_KEY" value="$PRIVATE_KEY"/>
+            <preference name="pub" value="$PUB_KEY" />
+            <preference name="txcode" value="$TXCODE" />
+            <preference name="merchantid" value="$MERCHANTID" />
+            <preference name="postid" value="$POSID" />
+            <preference name="branchid" value="$BRANCHID" />
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -54,6 +58,11 @@
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <preference name="pub" value="$PUB_KEY" />
+            <preference name="txcode" value="$TXCODE" />
+            <preference name="merchantid" value="$MERCHANTID" />
+            <preference name="postid" value="$POSID" />
+            <preference name="branchid" value="$BRANCHID" />
+
             <feature name="TffCCB">
                 <param name="ios-package" value="CcbpayPlugin" />
                 <param name="onload" value="true" />

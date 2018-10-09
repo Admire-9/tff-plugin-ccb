@@ -22,10 +22,12 @@ import java.util.Map;
 public class TffCCB extends CordovaPlugin {
     private Activity activity;
     public static final String TAG = "建行支付";
-    private String price = "0.01";
     private CcbPayResultListener listener = null;
-    private static String Ip = "";
-
+    private String pub;
+    private String txcode;
+    private String merchantid;
+    private String postid;
+    private String branchid;
     /**
      * Sets the context of the Command. This can then be used to do things like
      * get file paths associated with the Activity.
@@ -37,6 +39,11 @@ public class TffCCB extends CordovaPlugin {
         super.initialize(cordova, webView);
         Log.i("initialize","============================");
         activity = cordova.getActivity();
+        pub = webView.getPreferences().getString("PUB", "");
+        txcode = webView.getPreferences().getString("TXCODE", "");
+        merchantid = webView.getPreferences().getString("MERCHANTID", "");
+        postid = webView.getPreferences().getString("POSTID", "");
+        branchid = webView.getPreferences().getString("BRANCHID", "");
     }
 
     /**
@@ -48,9 +55,13 @@ public class TffCCB extends CordovaPlugin {
      * @return                  True if the action was valid, false if not.
      */
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        Ip = IPUtil.getIPAddress();
+        String ip = IPUtil.getIPAddress();
+        String price = "";
         Url url = new Url();
-        String params = url.make(price, Ip);
+        JSONObject arguments = args.getJSONObject(0);
+        String price = arguments.getString("price");
+        String orderid = arguments.getString("orderid");
+        String params = url.make(pub, txcode, merchantid, postid, branchid, price, ip, price, orderid);
         CcbSdkLogUtil.d(params);
         listener = new CcbPayResultListener() {
             @Override

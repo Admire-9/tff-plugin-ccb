@@ -30,6 +30,7 @@
 @property(nonatomic, copy) NSString * CLIENTIP;
 @property(nonatomic, copy) NSString * REGINFO;
 @property(nonatomic, copy) NSString * PROINFO;
+@property(nonatomic, copy) NSString * REFERER;
 @property(nonatomic, copy) NSString * THIRDAPPINFO;
 
 @property(nonatomic, readonly) NSMutableDictionary * extraParams;
