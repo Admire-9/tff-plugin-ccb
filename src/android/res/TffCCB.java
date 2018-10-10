@@ -15,6 +15,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -56,13 +57,12 @@ public class TffCCB extends CordovaPlugin {
      */
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         String ip = IPUtil.getIPAddress();
-        String price = "";
         Url url = new Url();
         JSONObject arguments = args.getJSONObject(0);
         String price = arguments.getString("price");
         String orderid = arguments.getString("orderid");
         String installnum = arguments.getString("installnum");
-        String params = url.make(pub, txcode, merchantid, posid, branchid, price, ip, price, orderid, installnum);
+        String params = url.make(pub, txcode, merchantid, posid, branchid, price, ip, orderid, installnum);
         CcbSdkLogUtil.d(params);
         listener = new CcbPayResultListener() {
             @Override
