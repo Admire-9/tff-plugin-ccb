@@ -13,17 +13,21 @@
     <js-module name="TffCCB" src="www/tffccb.js">
         <clobbers target="TffCCB" />
     </js-module>
-
+    <preference name="PUB_KEY" />
+    <preference name="TXCODE" />
+    <preference name="MERCHANTID" />
+    <preference name="POSID" />
+    <preference name="BRANCHID" />
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="TffCCB" >
                 <param name="android-package" value="org.apache.cordova.tffccb.TffCCB"/>
             </feature>
-            <preference name="pub" value="$PUB_KEY" />
-            <preference name="txcode" value="$TXCODE" />
-            <preference name="merchantid" value="$MERCHANTID" />
-            <preference name="postid" value="$POSID" />
-            <preference name="branchid" value="$BRANCHID" />
+            <preference name="PUB_KEY" value="$PUB_KEY" />
+            <preference name="TXCODE" value="$TXCODE" />
+            <preference name="MERCHANTID" value="$MERCHANTID" />
+            <preference name="POSID" value="$POSID" />
+            <preference name="BRANCHID" value="$BRANCHID" />
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -57,16 +61,15 @@
     </platform>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <preference name="pub" value="$PUB_KEY" />
-            <preference name="txcode" value="$TXCODE" />
-            <preference name="merchantid" value="$MERCHANTID" />
-            <preference name="postid" value="$POSID" />
-            <preference name="branchid" value="$BRANCHID" />
-
             <feature name="TffCCB">
                 <param name="ios-package" value="CcbpayPlugin" />
                 <param name="onload" value="true" />
             </feature>
+            <preference name="PUB_KEY" value="$PUB_KEY" />
+            <preference name="TXCODE" value="$TXCODE" />
+            <preference name="MERCHANTID" value="$MERCHANTID" />
+            <preference name="POSID" value="$POSID" />
+            <preference name="BRANCHID" value="$BRANCHID" />
         </config-file>
         <config-file target="*-Info.plist" parent="CFBundleURLTypes">
             <array>

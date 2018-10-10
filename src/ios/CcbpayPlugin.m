@@ -10,11 +10,11 @@
 
 -(void)pluginInitialize{
    CDVViewController *viewController = (CDVViewController *)self.viewController;
-   self.pub = [viewController.settings objectForKey:@"pub"];
-   self.txcode = [viewController.settings objectForKey:@"txcode"];
-   self.merchantid = [viewController.settings objectForKey:@"merchantid"];
-   self.postid = [viewController.settings objectForKey:@"postid"];
-   self.branchid = [viewController.settings objectForKey:@"branchid"];
+   self.pub = [viewController.settings objectForKey:@"PUB"];
+   self.txcode = [viewController.settings objectForKey:@"TXCODE"];
+   self.merchantid = [viewController.settings objectForKey:@"MERCHANTID"];
+   self.postid = [viewController.settings objectForKey:@"POSID"];
+   self.branchid = [viewController.settings objectForKey:@"BRANCHID"];
 }
 
 - (void) pay:(CDVInvokedUrlCommand *)command

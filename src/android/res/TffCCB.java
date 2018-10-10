@@ -61,7 +61,8 @@ public class TffCCB extends CordovaPlugin {
         JSONObject arguments = args.getJSONObject(0);
         String price = arguments.getString("price");
         String orderid = arguments.getString("orderid");
-        String params = url.make(pub, txcode, merchantid, postid, branchid, price, ip, price, orderid);
+        String installnum = arguments.getString("installnum");
+        String params = url.make(pub, txcode, merchantid, postid, branchid, price, ip, price, orderid, installnum);
         CcbSdkLogUtil.d(params);
         listener = new CcbPayResultListener() {
             @Override
@@ -70,13 +71,13 @@ public class TffCCB extends CordovaPlugin {
                 for (Map.Entry entry : result.entrySet()) {
                     Log.i(TAG, "key --" + entry.getKey() + "  value --" + entry.getValue());
                 }
-                callbackContext.success(1);
+                callbackContext.success(new JSONObject(result));
             }
 
             @Override
             public void onFailed(String msg) {
                 Log.i(TAG, "支付失败 --" + msg);
-                callbackContext.error(0);
+                callbackContext.error(msg);
             }   
         };
         Platform ccbPayPlatform = new CcbPayPlatform
