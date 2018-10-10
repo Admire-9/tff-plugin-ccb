@@ -16,7 +16,7 @@
     <preference name="PUB" />
     <preference name="TXCODE" />
     <preference name="MERCHANTID" />
-    <preference name="POSTID" />
+    <preference name="POSID" />
     <preference name="BRANCHID" />
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
