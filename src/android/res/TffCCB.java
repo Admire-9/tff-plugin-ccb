@@ -26,7 +26,7 @@ public class TffCCB extends CordovaPlugin {
     private String pub;
     private String txcode;
     private String merchantid;
-    private String postid;
+    private String posid;
     private String branchid;
     /**
      * Sets the context of the Command. This can then be used to do things like
@@ -42,7 +42,7 @@ public class TffCCB extends CordovaPlugin {
         pub = webView.getPreferences().getString("PUB", "");
         txcode = webView.getPreferences().getString("TXCODE", "");
         merchantid = webView.getPreferences().getString("MERCHANTID", "");
-        postid = webView.getPreferences().getString("POSTID", "");
+        posid = webView.getPreferences().getString("POSID", "");
         branchid = webView.getPreferences().getString("BRANCHID", "");
     }
 
@@ -62,7 +62,7 @@ public class TffCCB extends CordovaPlugin {
         String price = arguments.getString("price");
         String orderid = arguments.getString("orderid");
         String installnum = arguments.getString("installnum");
-        String params = url.make(pub, txcode, merchantid, postid, branchid, price, ip, price, orderid, installnum);
+        String params = url.make(pub, txcode, merchantid, posid, branchid, price, ip, price, orderid, installnum);
         CcbSdkLogUtil.d(params);
         listener = new CcbPayResultListener() {
             @Override

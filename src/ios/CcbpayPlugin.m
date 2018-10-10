@@ -9,12 +9,12 @@
 @implementation CcbpayPlugin
 
 -(void)pluginInitialize{
-   CDVViewController *viewController = (CDVViewController *)self.viewController;
-   self.pub = [viewController.settings objectForKey:@"PUB"];
-   self.txcode = [viewController.settings objectForKey:@"TXCODE"];
-   self.merchantid = [viewController.settings objectForKey:@"MERCHANTID"];
-   self.postid = [viewController.settings objectForKey:@"POSID"];
-   self.branchid = [viewController.settings objectForKey:@"BRANCHID"];
+    CDVViewController *viewController = (CDVViewController *)self.viewController;
+    self.pub = [viewController.settings objectForKey:@"PUB"];
+    self.txcode = [viewController.settings objectForKey:@"TXCODE"];
+    self.merchantid = [viewController.settings objectForKey:@"MERCHANTID"];
+    self.posid = [viewController.settings objectForKey:@"POSID"];
+    self.branchid = [viewController.settings objectForKey:@"BRANCHID"];
 }
 
 - (void) pay:(CDVInvokedUrlCommand *)command
@@ -29,7 +29,7 @@
     //partner和seller获取失败,提示
 //    if ([self.partner length] == 0 ||
 //        [self.seller length] == 0 ||
-//        [self.privateKey length] == 0 || )
+//        [self.privateKey length] == 0)
 //    {
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
 //                                                        message:@"缺少partner或者seller或者私钥。"
@@ -46,19 +46,19 @@
     
     //从API请求获取支付信息
     NSMutableDictionary *args = [command argumentAtIndex:0];
-    NSString   *MERCHANTID  = @"105510148160150"; //105510148160150
-    NSString   *POSID  = @"809042103"; //809042103
-    NSString   *BRANCHID     = @"510000000"; //510000000
-    NSString   *ORDERID    = @"10551014816015098577";
-    NSString   *PAYMENT    = @"0.01";
-    NSString   *CURCODE    = @"01";
-    NSString   *REMARK1    = [args objectForKey:@"REMARK1"];
-    NSString   *REMARK2    = [args objectForKey:@"REMARK2"];
-    NSString   *TXCODE    = @"520100"; //520100
-    NSString   *TYPE    = @"1";
-    NSString   *PUB    = @"9d3f3c6e3beac835b646359d020111"; //9d3f3c6e3beac835b646359d020111
-    NSString   *GATEWAY    = @"";
-    NSString   *INSTALLNUM = @"3";
+    NSString   *MERCHANTID  = self.merchantid; //@"105510148160150"
+    NSString   *POSID  = self.posid; //@"809042103"
+    NSString   *BRANCHID     = self.branchid; // @"510000000"
+    NSString   *PUB    = self.pub; //@"9d3f3c6e3beac835b646359d020111"
+    NSString   *TXCODE    = self.txcode; //@"520100"
+    NSString   *ORDERID    = [args objectForKey:@"orderid"]; //@"10551014816015098577"
+    NSString   *PAYMENT    = [args objectForKey:@"payment"]; //@"0.01"
+    NSString   *REMARK1    = [args objectForKey:@"remark1"];
+    NSString   *REMARK2    = [args objectForKey:@"remark2"];
+    NSString   *INSTALLNUM = [args objectForKey:@"installnum"]; //@"3"
+    NSString   *CURCODE    = @"01"; //默认
+    NSString   *TYPE    = @"1"; //默认
+    NSString   *GATEWAY    = @"0"; //默认
     NSString   *CLIENTIP = [[CCBNetPay defaultService] getIPAddress];
     NSString   *THIRDAPPINFO = @"comccbpay105510148160150testtff";
     CcbOrder *order = [[CcbOrder alloc] init];
@@ -68,7 +68,7 @@
     order.ORDERID = ORDERID;
     order.PAYMENT = PAYMENT;
     order.CURCODE = CURCODE;
-    order.REMARK1 =  REMARK1;
+    order.REMARK1 =  REMARK1; //回调URL
     order.REMARK2 = REMARK2;
     order.TXCODE = TXCODE;
     order.TYPE = TYPE;
@@ -91,19 +91,13 @@
 //        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
 //                       orderSpec, signedString, @"RSA"];
         [[CCBNetPay defaultService] payOrder:orderSpec callback:^(NSDictionary *resultDic){
+            if ([[resultDic objectForKey:@"SUCCESS"]  isEqual: @"Y"]) {
+                [self successWithCallbackID:self.currentCallbackId messageAsDictionary:resultDic];
+            } else {
+                [self failWithCallbackID:self.currentCallbackId messageAsDictionary:resultDic];
+            }
             NSLog(@"reslut = %@",resultDic);
         }];
-        
-        
-//        [[AlipaySDK defaultService] payOrder:orderString fromScheme:[NSString stringWithFormat:@"a%@", self.partner] callback:^(NSDictionary *resultDic) {
-//            if ([[resultDic objectForKey:@"resultStatus"]  isEqual: @"9000"]) {
-//                [self successWithCallbackID:self.currentCallbackId messageAsDictionary:resultDic];
-//            } else {
-//                [self failWithCallbackID:self.currentCallbackId messageAsDictionary:resultDic];
-//            }
-//
-//            NSLog(@"reslut = %@",resultDic);
-//        }];
         
     }
 }

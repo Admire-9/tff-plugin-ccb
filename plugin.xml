@@ -13,17 +13,17 @@
     <js-module name="TffCCB" src="www/tffccb.js">
         <clobbers target="TffCCB" />
     </js-module>
-    <preference name="PUB_KEY" />
+    <preference name="PUB" />
     <preference name="TXCODE" />
     <preference name="MERCHANTID" />
-    <preference name="POSID" />
+    <preference name="POSTID" />
     <preference name="BRANCHID" />
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="TffCCB" >
                 <param name="android-package" value="org.apache.cordova.tffccb.TffCCB"/>
             </feature>
-            <preference name="PUB_KEY" value="$PUB_KEY" />
+            <preference name="PUB" value="$PUB" />
             <preference name="TXCODE" value="$TXCODE" />
             <preference name="MERCHANTID" value="$MERCHANTID" />
             <preference name="POSID" value="$POSID" />
@@ -65,7 +65,7 @@
                 <param name="ios-package" value="CcbpayPlugin" />
                 <param name="onload" value="true" />
             </feature>
-            <preference name="PUB_KEY" value="$PUB_KEY" />
+            <preference name="PUB" value="$PUB" />
             <preference name="TXCODE" value="$TXCODE" />
             <preference name="MERCHANTID" value="$MERCHANTID" />
             <preference name="POSID" value="$POSID" />

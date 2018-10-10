@@ -42,14 +42,14 @@ public class Url {
   public Url() {
   }
 
-  public String make(String pub, String txcode, String merchantid, String postid, String branchid, String price, String ip, String orderid, String installnum) {
+  public String make(String pub, String txcode, String merchantid, String posid, String branchid, String price, String ip, String orderid, String installnum) {
     String tmp;
     String tmp0;
     String temp_New1 = "", urlResult = "";
     PUB32 = pub;
     PUB32TR2 = pub;
     CLIENTIP = ip;
-    POSID = postid;
+    POSID = posid;
     PAYMENT = price;
     TXCODE = txcode;
     MERCHANTID = merchantid;
