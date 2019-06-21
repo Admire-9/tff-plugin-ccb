@@ -79,12 +79,12 @@ public class Url {
         if (1 < Integer.parseInt(INSTALLNUM))
           temp_New += "&INSTALLNUM=" + INSTALLNUM;
       }
-      temp_New += "&THIRDAPPINFO=ccbDemo";
+      temp_New += "&THIRDAPPINFO=ccbdemo";
       temp_New1 = tmp + "&TYPE=1&GATEWAY=" + GATEWAY + "&CLIENTIP=" + CLIENTIP
               + "&REGINFO=" + escape(REGINFO).replaceAll("%", "%25")
               + "&PROINFO=" + escape(PROINFO).replaceAll("%", "%25")
               + "&REFERER=" + MER_REFERER + "&INSTALLNUM=" + INSTALLNUM
-              + "&THIRDAPPINFO=ccbDemo";
+              + "&THIRDAPPINFO=ccbdemo";
     }
     if ("4".equals(index)) {
       temp_New = tmp + "&TYPE=1&PUB=" + PUB32TR2 + "&GATEWAY=" + GATEWAY
@@ -94,12 +94,12 @@ public class Url {
         if (1 < Integer.parseInt(INSTALLNUM))
           temp_New += "&INSTALLNUM=" + INSTALLNUM;
       }
-      temp_New += "&THIRDAPPINFO=ccbDemo";
+      temp_New += "&THIRDAPPINFO=ccbdemo";
       temp_New1 = tmp + "&TYPE=1&GATEWAY=" + GATEWAY + "&CLIENTIP=" + CLIENTIP
               + "&REGINFO=" + escape(REGINFO).replaceAll("%", "%25")
               + "&PROINFO=" + escape(PROINFO).replaceAll("%", "%25")
               + "&REFERER=" + MER_REFERER + "&INSTALLNUM=" + INSTALLNUM
-              + "&THIRDAPPINFO=ccbDemo"
+              + "&THIRDAPPINFO=ccbdemo"
               + "&STOREINFO=" + escape(STOREINFO).replaceAll("%", "%25")
               + "&PROTYPE=" + escape(PROTYPE).replaceAll("%", "%25");
     }
