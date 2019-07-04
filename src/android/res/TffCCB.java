@@ -59,10 +59,11 @@ public class TffCCB extends CordovaPlugin {
         String ip = IPUtil.getIPAddress();
         Url url = new Url();
         JSONObject arguments = args.getJSONObject(0);
-        String price = arguments.getString("price");
+        String price = arguments.getString("payment");
         String orderid = arguments.getString("orderid");
+        String remark1 = arguments.getString("remark1");
         String installnum = arguments.getString("installnum");
-        String params = url.make(pub, txcode, merchantid, posid, branchid, price, ip, orderid, installnum);
+        String params = url.make(pub, txcode, merchantid, posid, branchid, price, ip, orderid, installnum, remark1);
         CcbSdkLogUtil.d(params);
         listener = new CcbPayResultListener() {
             @Override

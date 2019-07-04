@@ -42,7 +42,7 @@ public class Url {
   public Url() {
   }
 
-  public String make(String pub, String txcode, String merchantid, String posid, String branchid, String price, String ip, String orderid, String installnum) {
+  public String make(String pub, String txcode, String merchantid, String posid, String branchid, String price, String ip, String orderid, String installnum, String remark1) {
     String tmp;
     String tmp0;
     String temp_New1 = "", urlResult = "";
@@ -56,6 +56,7 @@ public class Url {
     BRANCHID = branchid;
     ORDERID = orderid;
     INSTALLNUM = installnum;
+    REMARK1 = remark1;
     tmp = "MERCHANTID=" + MERCHANTID + "&POSID=" + POSID + "&BRANCHID="
             + BRANCHID + "&ORDERID=" + ORDERID + "&PAYMENT=" + PAYMENT
             + "&CURCODE=" + CURCODE + "&TXCODE=" + TXCODE + "&REMARK1="
@@ -79,12 +80,12 @@ public class Url {
         if (1 < Integer.parseInt(INSTALLNUM))
           temp_New += "&INSTALLNUM=" + INSTALLNUM;
       }
-      temp_New += "&THIRDAPPINFO=ccbdemo";
+      temp_New += "&THIRDAPPINFO=ccbDemo";
       temp_New1 = tmp + "&TYPE=1&GATEWAY=" + GATEWAY + "&CLIENTIP=" + CLIENTIP
               + "&REGINFO=" + escape(REGINFO).replaceAll("%", "%25")
               + "&PROINFO=" + escape(PROINFO).replaceAll("%", "%25")
               + "&REFERER=" + MER_REFERER + "&INSTALLNUM=" + INSTALLNUM
-              + "&THIRDAPPINFO=ccbdemo";
+              + "&THIRDAPPINFO=ccbDemo";
     }
     if ("4".equals(index)) {
       temp_New = tmp + "&TYPE=1&PUB=" + PUB32TR2 + "&GATEWAY=" + GATEWAY
@@ -94,12 +95,12 @@ public class Url {
         if (1 < Integer.parseInt(INSTALLNUM))
           temp_New += "&INSTALLNUM=" + INSTALLNUM;
       }
-      temp_New += "&THIRDAPPINFO=ccbdemo";
+      temp_New += "&THIRDAPPINFO=ccbDemo";
       temp_New1 = tmp + "&TYPE=1&GATEWAY=" + GATEWAY + "&CLIENTIP=" + CLIENTIP
               + "&REGINFO=" + escape(REGINFO).replaceAll("%", "%25")
               + "&PROINFO=" + escape(PROINFO).replaceAll("%", "%25")
               + "&REFERER=" + MER_REFERER + "&INSTALLNUM=" + INSTALLNUM
-              + "&THIRDAPPINFO=ccbdemo"
+              + "&THIRDAPPINFO=ccbDemo"
               + "&STOREINFO=" + escape(STOREINFO).replaceAll("%", "%25")
               + "&PROTYPE=" + escape(PROTYPE).replaceAll("%", "%25");
     }

@@ -1,21 +1,11 @@
 
 #import "CcbpayPlugin.h"
 #import "CcbOrder.h"
-#import "MD5.h"
 
 #import "DataSigner.h"
 #import <CCBNetPaySDK/CCBNetPaySDK.h>
 #import <CommonCrypto/CommonDigest.h>
 @implementation CcbpayPlugin
-
--(void)pluginInitialize{
-    CDVViewController *viewController = (CDVViewController *)self.viewController;
-    self.pub = [viewController.settings objectForKey:@"PUB"];
-    self.txcode = [viewController.settings objectForKey:@"TXCODE"];
-    self.merchantid = [viewController.settings objectForKey:@"MERCHANTID"];
-    self.posid = [viewController.settings objectForKey:@"POSID"];
-    self.branchid = [viewController.settings objectForKey:@"BRANCHID"];
-}
 
 - (void) pay:(CDVInvokedUrlCommand *)command
 {
@@ -46,11 +36,11 @@
     
     //从API请求获取支付信息
     NSMutableDictionary *args = [command argumentAtIndex:0];
-    NSString   *MERCHANTID  = self.merchantid; //@"105510148160150"
-    NSString   *POSID  = self.posid; //@"809042103"
-    NSString   *BRANCHID     = self.branchid; // @"510000000"
-    NSString   *PUB    = self.pub; //@"9d3f3c6e3beac835b646359d020111"
-    NSString   *TXCODE    = self.txcode; //@"520100"
+    NSString   *MERCHANTID  = @"105510148160150"; //@"105510148160150"
+    NSString   *POSID  = @"809042103"; //@"809042103"
+    NSString   *BRANCHID     = @"510000000"; // @"510000000"
+    NSString   *PUB    = @"9d3f3c6e3beac835b646359d020111"; //@"9d3f3c6e3beac835b646359d020111"
+    NSString   *TXCODE    = @"520100"; //@"520100"
     NSString   *ORDERID    = [args objectForKey:@"orderid"]; //@"10551014816015098577"
     NSString   *PAYMENT    = [args objectForKey:@"payment"]; //@"0.01"
     NSString   *REMARK1    = [args objectForKey:@"remark1"];
@@ -59,8 +49,8 @@
     NSString   *CURCODE    = @"01"; //默认
     NSString   *TYPE    = @"1"; //默认
     NSString   *GATEWAY    = @"0"; //默认
-    NSString   *CLIENTIP = [[CCBNetPay defaultService] getIPAddress];
-    NSString   *THIRDAPPINFO = @"comccbpay105510148160150testtff";
+    NSString   *CLIENTIP = @""; //@ [[CCBNetPay defaultService] getIPAddress]
+    NSString   *THIRDAPPINFO = @"comccbpay105510148160150tffccbpay";
     CcbOrder *order = [[CcbOrder alloc] init];
     order.MERCHANTID = MERCHANTID;
     order.POSID = POSID;
@@ -90,7 +80,7 @@
     if (orderSpec != nil) {
 //        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
 //                       orderSpec, signedString, @"RSA"];
-        [[CCBNetPay defaultService] payOrder:orderSpec callback:^(NSDictionary *resultDic){
+        [[CCBNetPay defaultService] payAppOrder:orderSpec callback:^(NSDictionary *resultDic){
             if ([[resultDic objectForKey:@"SUCCESS"]  isEqual: @"Y"]) {
                 [self successWithCallbackID:self.currentCallbackId messageAsDictionary:resultDic];
             } else {

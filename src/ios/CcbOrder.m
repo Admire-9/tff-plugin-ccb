@@ -1,4 +1,3 @@
-
 //
 //
 //
@@ -25,12 +24,13 @@
     self.REGINFO ? [discription appendFormat:@"&REGINFO=%@",self.REGINFO] : [discription appendFormat:@"&REGINFO=%@",@""];
     self.PROINFO ? [discription appendFormat:@"&PROINFO=%@",self.PROINFO] : [discription appendFormat:@"&PROINFO=%@",@""];
     [discription appendFormat:@"&REFERER=%@",@""];
-    if(self.INSTALLNUM){
+    int intINSTALLNUM = [self.INSTALLNUM intValue];
+    if(intINSTALLNUM >= 3){
         [discription appendFormat:@"&INSTALLNUM=%@",self.INSTALLNUM];
     }
     [discription appendFormat:@"&THIRDAPPINFO=%@",self.THIRDAPPINFO];
     NSString * MAC = [self md5:discription];
-
+    
     [discription appendFormat:@"&MAC=%@",MAC];
     NSString * discriptionUTF = [discription stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return discriptionUTF;

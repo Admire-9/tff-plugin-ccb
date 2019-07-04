@@ -1,9 +1,9 @@
 
 //
 //  Order.h
-//  AlixPayDemo
+//  tffccb
 //
-//  Created by 方彬 on 11/2/13.
+//  Created by admire on 18/10/12.
 //
 //
 
@@ -24,6 +24,7 @@
 @property(nonatomic, copy) NSString * TYPE;
 @property(nonatomic, copy) NSString * PUB;
 @property(nonatomic, copy) NSString * GATEWAY;
+@property(nonatomic, copy) NSString * INSTALLNUM;
 /*
  * 以下可选
  */
